@@ -8,12 +8,8 @@ spec:
         generators:
           - list:
               elements:  # from /charts/
-              - addonChart: external-secrets
               - addonChart: kyverno
-          - clusters:
-              selector:
-                matchExpressions:
-                - {key: 'akuity.io/argo-cd-cluster-name', operator: NotIn, values: [in-cluster]}
+          - clusters: {}
   template:
     metadata:
       name: 'addon-{{name}}-{{addonChart}}'
@@ -23,7 +19,7 @@ spec:
         helm:
           valueFiles:
           - '../../clusters/{{name}}/addons-values.yaml'
-        repoURL: 'https://github.com/<username>/control-plane'
+        repoURL: 'https://github.com/acuD1/control-plane'
         path: charts/{{addonChart}}
         targetRevision: HEAD
       destination:
